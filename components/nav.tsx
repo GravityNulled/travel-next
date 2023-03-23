@@ -2,10 +2,11 @@
 import { AiOutlineMenu } from "react-icons/ai";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-type links = {
+
+interface links {
   title: string;
   path: string;
-};
+}
 
 const navLinks: Array<links> = [
   {
@@ -14,7 +15,7 @@ const navLinks: Array<links> = [
   },
   {
     title: "Hotel",
-    path: "/hotel",
+    path: "/hotels",
   },
   {
     title: "Flights",
@@ -26,15 +27,22 @@ const navLinks: Array<links> = [
   },
   {
     title: "Login",
-    path: "/Login",
+    path: "/login",
   },
 ];
 
 const Nav = () => {
   const router = useRouter();
   return (
-    <nav className="flex items-center justify-between mx-auto md:w-5/6 py-10  container">
-      <img src="/images/Logo.png" alt="" />
+    <nav
+      className={`container flex items-center justify-between py-10 mx-auto md:w-5/6 font-poppins`}
+    >
+      <img
+        src="/images/Logo.png"
+        alt=""
+        className="cursor-pointer"
+        onClick={() => router.push("/")}
+      />
       <div className="flex items-center gap-10">
         {navLinks.map((nav, i) => {
           return (
@@ -48,8 +56,8 @@ const Nav = () => {
           );
         })}
         <button
-          onClick={() => router.push("/singup")}
-          className="border-[2px] px-8 font-semibold py-2 bg-yellow-400 rounded-lg "
+          onClick={() => router.push("/signup")}
+          className="border-[2px] px-8 font-semibold font-sans py-2 bg-[#F1A501] text-white rounded-lg "
         >
           Sign Up
         </button>
