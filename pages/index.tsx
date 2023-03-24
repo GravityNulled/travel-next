@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import Services from "@/components/services";
 import Head from "next/head";
-import Image from "next/image";
 import { BsPlayCircle } from "react-icons/bs";
 
 interface detailsProps {
@@ -33,7 +32,7 @@ const items: Array<detailsProps> = [
   },
 ];
 
-export default function Home(props: any) {
+export default function Home() {
   return (
     <>
       <Head>
@@ -71,13 +70,13 @@ export default function Home(props: any) {
         </div>
 
         {/* OFFERS AND SERVICES */}
-        <div className="flex flex-col py-10 items-center">
-          <h2 className="text-gray-600 text-xl pb-4">CATEGORY</h2>
-          <p className="font-bold font-volkov text-4xl">
+        <div className="flex flex-col items-center py-10">
+          <h2 className="pb-4 text-xl text-gray-600">CATEGORY</h2>
+          <p className="text-4xl font-bold font-volkov">
             We Offer Best Services
           </p>
         </div>
-        <div className="grid grid-cols-4 items-center ">
+        <div className="grid items-center grid-cols-4 ">
           {items.map((item, i) => {
             return (
               <Services
@@ -88,6 +87,10 @@ export default function Home(props: any) {
               />
             );
           })}
+        </div>
+        <div className="flex flex-col items-center py-10 mt-10">
+          <h2 className="pb-4 text-xl text-gray-600">Top Selling</h2>
+          <p className="text-4xl font-bold font-volkov">Top Destinations</p>
         </div>
       </main>
     </>
