@@ -10,9 +10,9 @@ interface cityProps {
 
 const CityCard: FC<cityProps> = ({ image, location, cost, days }) => {
   return (
-    <div className="flex-col gap-4 rounded-md shadow-md">
-      <img src={image} alt={location} />
-      <div className="flex items-center justify-between">
+    <div className="flex-col gap-4 rounded-md shadow-xl max-w-[300px]">
+      <img className="w-[300px] h-[400px] object-cover rounded-t-xl" src={image} alt={location} />
+      <div className="flex items-center justify-between px-2">
         <p>{location}</p>
         <p>{cost}</p>
       </div>
@@ -22,3 +22,4 @@ const CityCard: FC<cityProps> = ({ image, location, cost, days }) => {
 };
 
 export default CityCard;
+

@@ -2,12 +2,40 @@
 import Services from "@/components/services";
 import Head from "next/head";
 import { BsPlayCircle } from "react-icons/bs";
+import CityCard from "@/components/citycard";
 
 interface detailsProps {
   image?: string;
   title: string;
   desc: string;
 }
+interface cityProps {
+  image: string;
+  location: string;
+  cost: string;
+  days: string;
+}
+
+const cities: cityProps[] = [
+  {
+    image: "/images/nairobi.jpg",
+    location: "Nairobi, Kenya",
+    cost: "$5,42k",
+    days: "10 Days Trip",
+  },
+  {
+    image: "/images/tokyo.jpg",
+    location: "Tokyo, Japan",
+    cost: "$4.2k",
+    days: "12 Days Trip",
+  },
+  {
+    image: "/images/london.jpg",
+    location: "Nairobi, Kenya",
+    cost: "$15k",
+    days: "28 Days Trip",
+  },
+];
 
 const items: Array<detailsProps> = [
   {
@@ -32,7 +60,7 @@ const items: Array<detailsProps> = [
   },
 ];
 
-export default function Home() {
+export default function Home(props) {
   return (
     <>
       <Head>
@@ -91,6 +119,19 @@ export default function Home() {
         <div className="flex flex-col items-center py-10 mt-10">
           <h2 className="pb-4 text-xl text-gray-600">Top Selling</h2>
           <p className="text-4xl font-bold font-volkov">Top Destinations</p>
+        </div>
+        <div className="grid grid-cols-3">
+          {cities.map((c, i) => {
+            return (
+              <CityCard
+                key={i}
+                cost={c.cost}
+                days={c.days}
+                image={c.image}
+                location={c.location}
+              />
+            );
+          })}
         </div>
       </main>
     </>
