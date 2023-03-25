@@ -7,22 +7,23 @@ import { TbLocationFilled } from "react-icons/tb";
 import { MdPayments } from "react-icons/md";
 import { AiFillCar } from "react-icons/ai";
 import Steps from "@/components/steps";
+import TripsCard from "@/components/tripscard";
 
 const steps: Array<stepsProps> = [
   {
-    icon: <TbLocationFilled />,
+    icon: <TbLocationFilled size={28} className="text-[#F0BB1F]" />,
     description:
       "Lorem ipsum dolor sit amet, consectetu adipiscing elit. Urna, tortor tempus.",
     title: "Choose Destination",
   },
   {
-    icon: <MdPayments />,
+    icon: <MdPayments size={28} className="text-[#F15A2B]" />,
     description:
       "Lorem ipsum dolor sit amet, consectetu adipiscing elit. Urna, tortor tempus.",
     title: "Make Payment",
   },
   {
-    icon: <AiFillCar />,
+    icon: <AiFillCar size={28} className="text-[#006380]" />,
     description:
       "Lorem ipsum dolor sit amet, consectetu adipiscing elit. Urna, tortor tempus.",
     title: "Reach Airport on Selected Date",
@@ -76,7 +77,17 @@ const items: Array<detailsProps> = [
   },
 ];
 
-const Home = () => {
+const tripsdata: Array<tripProps> = [
+  {
+    amount: 24,
+    image: "/images/baloons.jpg",
+    creater: "omar",
+    date: "24-27 June",
+    title: "Trip to Maasai Mara",
+  },
+];
+
+const Home = (props) => {
   return (
     <>
       <Head>
@@ -149,16 +160,32 @@ const Home = () => {
             );
           })}
         </div>
-        <h3 className="pt-10 pb-4 mt-12">Easy and Fast</h3>
-        <div className="flex flex-col">
-          <p>Book your next trip in 3 easy steps</p>
-          {steps.map((step, i) => {
+        <h3 className="pt-10 pb-4 mt-12 text-xl">Easy and Fast</h3>
+        <div className="grid items-center grid-cols-2 gap-4">
+          <div className="flex flex-col gap-10">
+            <p className="text-4xl font-bold">
+              Book your next trip in 3 easy steps
+            </p>
+            {steps.map((step, i) => {
+              return (
+                <Steps
+                  key={i}
+                  description={step.description}
+                  icon={step.icon}
+                  title={step.title}
+                />
+              );
+            })}
+          </div>
+          {tripsdata.map((trip, i) => {
             return (
-              <Steps
+              <TripsCard
                 key={i}
-                description={step.description}
-                icon={step.icon}
-                title={step.title}
+                amount={trip.amount}
+                creater={trip.creater}
+                date={trip.date}
+                image={trip.image}
+                title={trip.title}
               />
             );
           })}

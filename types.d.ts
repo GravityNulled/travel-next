@@ -35,3 +35,10 @@ interface tripProps {
 interface icons {
   icon: ReactNode;
 }
+
+interface testimonialProps {
+  image?: string;
+  testimonial: string;
+  name: string;
+  details: string;
+}
