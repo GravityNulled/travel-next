@@ -3,18 +3,31 @@ import Services from "@/components/services";
 import Head from "next/head";
 import { BsPlayCircle } from "react-icons/bs";
 import CityCard from "@/components/citycard";
+import { TbLocationFilled } from "react-icons/tb";
+import { MdPayments } from "react-icons/md";
+import { AiFillCar } from "react-icons/ai";
+import Steps from "@/components/steps";
 
-interface detailsProps {
-  image?: string;
-  title: string;
-  desc: string;
-}
-interface cityProps {
-  image: string;
-  location: string;
-  cost: string;
-  days: string;
-}
+const steps: Array<stepsProps> = [
+  {
+    icon: <TbLocationFilled />,
+    description:
+      "Lorem ipsum dolor sit amet, consectetu adipiscing elit. Urna, tortor tempus.",
+    title: "Choose Destination",
+  },
+  {
+    icon: <MdPayments />,
+    description:
+      "Lorem ipsum dolor sit amet, consectetu adipiscing elit. Urna, tortor tempus.",
+    title: "Make Payment",
+  },
+  {
+    icon: <AiFillCar />,
+    description:
+      "Lorem ipsum dolor sit amet, consectetu adipiscing elit. Urna, tortor tempus.",
+    title: "Reach Airport on Selected Date",
+  },
+];
 
 const cities: cityProps[] = [
   {
@@ -22,18 +35,21 @@ const cities: cityProps[] = [
     location: "Nairobi, Kenya",
     cost: "$5,42k",
     days: "10 Days Trip",
+    icon: <TbLocationFilled />,
   },
   {
     image: "/images/tokyo.jpg",
     location: "Tokyo, Japan",
     cost: "$4.2k",
     days: "12 Days Trip",
+    icon: <TbLocationFilled />,
   },
   {
     image: "/images/london.jpg",
     location: "Nairobi, Kenya",
     cost: "$15k",
     days: "28 Days Trip",
+    icon: <TbLocationFilled />,
   },
 ];
 
@@ -60,7 +76,7 @@ const items: Array<detailsProps> = [
   },
 ];
 
-export default function Home(props) {
+const Home = () => {
   return (
     <>
       <Head>
@@ -93,7 +109,6 @@ export default function Home(props) {
               </div>
             </div>
           </div>
-          {/* <Image src={"/images/person.png"} alt="person"  className="object-cover"/> */}
           <img src="/images/person.png" alt="person" />
         </div>
 
@@ -124,6 +139,7 @@ export default function Home(props) {
           {cities.map((c, i) => {
             return (
               <CityCard
+                icon={c.icon}
                 key={i}
                 cost={c.cost}
                 days={c.days}
@@ -133,7 +149,22 @@ export default function Home(props) {
             );
           })}
         </div>
+        <h3 className="pt-10 pb-4 mt-12">Easy and Fast</h3>
+        <div className="flex flex-col">
+          <p>Book your next trip in 3 easy steps</p>
+          {steps.map((step, i) => {
+            return (
+              <Steps
+                key={i}
+                description={step.description}
+                icon={step.icon}
+                title={step.title}
+              />
+            );
+          })}
+        </div>
       </main>
     </>
   );
-}
+};
+export default Home;

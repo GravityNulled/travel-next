@@ -1,13 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
-import React from "react";
+import React, { FC } from "react";
 
-interface detailsProps {
-  image?: string;
-  title: string;
-  desc: string;
-}
-
-const Services = (details: detailsProps) => {
+const Services: FC<detailsProps> = (details: detailsProps) => {
   return (
     <div className="flex flex-col hover:shadow-md px-2 hover:rounded-br-3xl hover:scale-110 duration-300 transition-all items-center text-center w-[200px]">
       <img

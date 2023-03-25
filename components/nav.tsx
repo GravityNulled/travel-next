@@ -1,12 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { AiOutlineMenu } from "react-icons/ai";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
-
-interface links {
-  title: string;
-  path: string;
-}
+import { links } from "@/types";
 
 const navLinks: Array<links> = [
   {
