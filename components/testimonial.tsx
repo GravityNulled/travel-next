@@ -12,12 +12,12 @@ const Testimonial: FC<testimonialProps> = ({
       <img
         src={image || "/images/profile1.jpg"}
         alt=""
-        className="rounded-full w-[50px] h-[50px]"
+        className="rounded-full w-[100px] h-[100px] object-cover"
       />
-      <p>{testimonial}</p>
-      <div className="flex flex-col">
-        <p>{name}</p>
-        <p>{details}</p>
+      <p className="my-4">{testimonial}</p>
+      <div className="flex flex-col gap-2">
+        <p className="text-xl font-semibold">{name}</p>
+        <p className="mt-2 text-sm">{details}</p>
       </div>
     </div>
   );

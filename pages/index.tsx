@@ -8,7 +8,40 @@ import { MdPayments } from "react-icons/md";
 import { AiFillCar } from "react-icons/ai";
 import Steps from "@/components/steps";
 import TripsCard from "@/components/tripscard";
+import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
+import Testimonial from "@/components/testimonial";
+
+const testimonials: Array<testimonialProps> = [
+  {
+    name: "Mike taylor",
+    details: "Lahore, Pakistan",
+    testimonial:
+      "“On the Windows talking painted pasture yet its express parties use. Sure last upon he same as knew next. Of believed or diverted no.”",
+    image: "/images/profile1.jpg",
+  },
+  {
+    name: "Mike taylor",
+    details: "Lahore, Pakistan",
+    testimonial:
+      "“On the Windows talking painted pasture yet its express parties use. Sure last upon he same as knew next. Of believed or diverted no.”",
+    image: "/images/profile1.jpg",
+  },
+  {
+    name: "Mike taylor",
+    details: "Lahore, Pakistan",
+    testimonial:
+      "“On the Windows talking painted pasture yet its express parties use. Sure last upon he same as knew next. Of believed or diverted no.”",
+    image: "/images/profile1.jpg",
+  },
+];
 const steps: Array<stepsProps> = [
   {
     icon: <TbLocationFilled size={28} className="text-[#F0BB1F]" />,
@@ -189,6 +222,31 @@ const Home = (props) => {
               />
             );
           })}
+        </div>
+        <h3 className="pt-10 pb-4 mt-12 text-xl uppercase">Testimonials</h3>
+        <p className="mb-4 text-3xl font-bold text-center">
+          What people say about Us.
+        </p>
+        <div className="mt-10 ">
+          <Swiper
+            modules={[Pagination, Navigation]}
+            navigation={{ enabled: true }}
+            pagination={{ clickable: true }}
+            slidesPerView={3}
+          >
+            {testimonials.map((test, index) => {
+              return (
+                <SwiperSlide key={index}>
+                  <Testimonial
+                    details={test.details}
+                    name={test.name}
+                    testimonial={test.testimonial}
+                    image={test.image}
+                  />
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
         </div>
       </main>
     </>
