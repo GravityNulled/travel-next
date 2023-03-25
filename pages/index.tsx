@@ -18,6 +18,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import Testimonial from "@/components/testimonial";
+import Footer from "../components/footer";
 
 const testimonials: Array<testimonialProps> = [
   {
@@ -248,6 +249,10 @@ const Home = (props) => {
             })}
           </Swiper>
         </div>
+        <div className="py-10 mx-auto mt-10">
+          <img src="/images/logos.png" alt="companies" />
+        </div>
+        <Footer />
       </main>
     </>
   );
