@@ -122,7 +122,7 @@ const tripsdata: Array<tripProps> = [
   },
 ];
 
-const Home = (props) => {
+const Home = () => {
   return (
     <>
       <Head>

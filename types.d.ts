@@ -42,3 +42,12 @@ interface testimonialProps {
   name: string;
   details: string;
 }
+
+interface inputProps {
+  height: string;
+  width: string;
+  color: string;
+  placeholder: string;
+  value: string;
+  handleChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
