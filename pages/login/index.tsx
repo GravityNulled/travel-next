@@ -26,7 +26,6 @@ const Index = () => {
       },
     },
   ];
-  console.log(email);
   return (
     <div className="container p-4 mx-auto md:w-5/6 font-poppins">
       <div className="flex shadow-sm w-[500px] mx-auto py-10 shadow-[#F1A501] flex-col gap-3 items-center mt-40">
