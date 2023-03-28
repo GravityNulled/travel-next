@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import { AiOutlineMenu } from "react-icons/ai";
 import { useRouter } from "next/navigation";
-import { links } from "@/types";
+import { signIn } from "next-auth/react";
 
 const navLinks: Array<links> = [
   {
@@ -51,7 +50,7 @@ const Nav = () => {
           );
         })}
         <button
-          onClick={() => router.push("/signup")}
+          onClick={() => router.push("/register")}
           className="border-[2px] px-8 font-semibold font-sans py-2 bg-[#F1A501] text-white rounded-lg "
         >
           Sign Up

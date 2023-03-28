@@ -8,11 +8,11 @@ import { MdPayments } from "react-icons/md";
 import { AiFillCar } from "react-icons/ai";
 import Steps from "@/components/steps";
 import TripsCard from "@/components/tripscard";
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
-
+import { Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-// Import Swiper styles
+import { useSession } from "next-auth/react";
+
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -123,6 +123,7 @@ const tripsdata: Array<tripProps> = [
 ];
 
 const Home = () => {
+  const { data: session, status } = useSession();
   return (
     <>
       <Head>
@@ -160,7 +161,7 @@ const Home = () => {
 
         {/* OFFERS AND SERVICES */}
         <div className="flex flex-col items-center py-10">
-          <h2 className="pb-4 text-xl text-gray-600">CATEGORY</h2>
+          <h2 className="pb-4 text-xl text-gray-600 uppercase">Category</h2>
           <p className="text-4xl font-bold font-volkov">
             We Offer Best Services
           </p>
