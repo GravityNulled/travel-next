@@ -9,3 +9,44 @@ datasource db {
   provider = "sqlite"
   url      = "file:./dev.db"
 }
+
+model User {
+  id            Int     @id @default(autoincrement())
+  name          String
+  email         String    @unique
+  password      String
+  isAdmin       Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  bookings      Booking[]
+}
+
+model Bus{
+  id           Int       @id @default(autoincrement())
+  reg_no       String    @unique
+  type         String?   
+  route        String?   
+  seats        Int
+  schedules    Schedule[]
+  booking      Booking[]
+}
+
+model Schedule {
+  id                Int       @id @default(autoincrement())
+  date              DateTime
+  departure_time    DateTime
+  arrival_time      DateTime
+  bus               Bus       @relation(fields: [busId], references: [id])
+  busId             Int
+  booking           Booking?
+}
+
+ model Booking{
+    id                Int       @id @default(autoincrement())
+    user              User      @relation(fields: [user_id], references: [id])
+    user_id           Int
+    bus               Bus       @relation(fields: [bus_id], references: [id])
+    bus_id            Int
+    schedule          Schedule  @relation(fields: [schedule_id], references: [id])
+    schedule_id       Int       @unique
+ }
