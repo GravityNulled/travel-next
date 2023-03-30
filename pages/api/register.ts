@@ -2,12 +2,6 @@ import { NextApiRequest, NextApiResponse } from "next";
 import bcrypt from "bcrypt";
 import prisma from "@/utils/client";
 
-interface User {
-  name: string;
-  password: string;
-  email: string;
-}
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<User>
@@ -35,6 +29,6 @@ export default async function handler(
     });
     return res.status(200).json(user);
   } catch (error) {
-    throw new Error(error);
+    return res.status(500);
   }
 }
