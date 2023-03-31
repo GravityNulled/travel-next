@@ -1,19 +1,23 @@
 import Input from "@/components/input";
 import React, { useState } from "react";
 import { signIn } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 const Index = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  
+  const { data, status } = useSession();
+  
   const handleSubmit = (e: any) => {
     e.preventDefault();
     signIn("credentials", {
-      callbackUrl:"/",
-      redirect: true,
+      callbackUrl: "/",
+      redirect: false,
       email,
       password,
     });
+    
   };
   const inputs: Array<inputProps> = [
     {
@@ -37,6 +41,8 @@ const Index = () => {
       },
     },
   ];
+
+  console.log(data);
   return (
     <div className="container p-4 mx-auto md:w-5/6 font-poppins">
       <form onSubmit={handleSubmit}>
@@ -58,7 +64,11 @@ const Index = () => {
             height={inputs[1].height}
             width={inputs[1].width}
           />
-          <button className="px-5 py-2 text-xl text-white bg-[#F1A501] border rounded-sm">
+          <button
+            className={`px-5 py-2 text-xl text-white bg-[#F1A501] border rounded-sm ${
+              status == "loading" ? "cursor-not-allowed" : ""
+            }`}
+          >
             Login
           </button>
         </div>

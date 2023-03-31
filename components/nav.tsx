@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 
 const navLinks: Array<links> = [
   {
@@ -19,14 +20,13 @@ const navLinks: Array<links> = [
     title: "Bookings",
     path: "/bookings",
   },
-  {
-    title: "Login",
-    path: "/login",
-  },
 ];
 
 const Nav = () => {
   const router = useRouter();
+
+  const { data: session } = useSession();
+
   return (
     <nav
       className={`container flex items-center justify-between py-10 mx-auto md:w-5/6 font-poppins`}
@@ -49,12 +49,28 @@ const Nav = () => {
             </li>
           );
         })}
-        <button
-          onClick={() => router.push("/register")}
-          className="border-[2px] px-8 font-semibold font-sans py-2 bg-[#F1A501] text-white rounded-lg "
-        >
-          Sign Up
-        </button>
+        {session ? (
+          ""
+        ) : (
+          <button className="text-xl" onClick={() => router.push("/login")}>
+            Login
+          </button>
+        )}
+        {session ? (
+          <button
+            onClick={() => signOut()}
+            className="border-[2px] px-8 font-semibold font-sans py-2 bg-[#F1A501] text-white rounded-lg "
+          >
+            Log Out
+          </button>
+        ) : (
+          <button
+            onClick={() => router.push("/register")}
+            className="border-[2px] px-8 font-semibold font-sans py-2 bg-[#F1A501] text-white rounded-lg "
+          >
+            Sign Up
+          </button>
+        )}
       </div>
     </nav>
   );
