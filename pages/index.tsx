@@ -82,7 +82,7 @@ const cities: cityProps[] = [
   },
   {
     image: "/images/london.jpg",
-    location: "Nairobi, Kenya",
+    location: "London, UK",
     cost: "$15k",
     days: "28 Days Trip",
     icon: <TbLocationFilled />,
