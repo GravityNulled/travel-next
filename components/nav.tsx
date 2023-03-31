@@ -9,14 +9,6 @@ const navLinks: Array<links> = [
     path: "/destination",
   },
   {
-    title: "Hotel",
-    path: "/hotels",
-  },
-  {
-    title: "Flights",
-    path: "/flights",
-  },
-  {
     title: "Bookings",
     path: "/bookings",
   },
