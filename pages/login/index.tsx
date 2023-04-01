@@ -1,23 +1,34 @@
 import Input from "@/components/input";
 import React, { useState } from "react";
 import { signIn } from "next-auth/react";
-import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]";
 
-const Index = () => {
+const Index = (
+  props: InferGetServerSidePropsType<typeof getServerSideProps>
+) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  
-  const { data, status } = useSession();
-  
-  const handleSubmit = (e: any) => {
+  const [error, SetError] = useState("");
+
+  const router = useRouter();
+
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-    signIn("credentials", {
+    const results = await signIn("credentials", {
       callbackUrl: "/",
       redirect: false,
       email,
       password,
     });
-    
+    if (results?.ok) {
+      router.push("/");
+    }
+    if (results?.error) {
+      SetError(results.error);
+    }
   };
   const inputs: Array<inputProps> = [
     {
@@ -42,7 +53,6 @@ const Index = () => {
     },
   ];
 
-  console.log(data);
   return (
     <div className="container p-4 mx-auto md:w-5/6 font-poppins">
       <form onSubmit={handleSubmit}>
@@ -64,6 +74,7 @@ const Index = () => {
             height={inputs[1].height}
             width={inputs[1].width}
           />
+          <p className="text-sm font-semibold text-red-900">{error}</p>
           <button
             className={`px-5 py-2 text-xl text-white bg-[#F1A501] border rounded-sm ${
               status == "loading" ? "cursor-not-allowed" : ""
@@ -78,3 +89,20 @@ const Index = () => {
 };
 
 export default Index;
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const session = await getServerSession(context.req, context.res, authOptions);
+  if (session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: {
+      session,
+    },
+  };
+}

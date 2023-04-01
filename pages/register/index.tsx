@@ -1,7 +1,12 @@
 import Input from "@/components/input";
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
+import { getServerSession } from "next-auth";
 import React, { useState } from "react";
+import { authOptions } from "../api/auth/[...nextauth]";
 
-const Index = () => {
+const Index = (
+  props: InferGetServerSidePropsType<typeof getServerSideProps>
+) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const inputs: Array<inputProps> = [
@@ -73,3 +78,20 @@ const Index = () => {
 };
 
 export default Index;
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const session = await getServerSession(context.req, context.res, authOptions);
+  if (session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: {
+      session,
+    },
+  };
+}

@@ -15,7 +15,7 @@ export const authOptions: NextAuthOptions = {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials, req) {
+      async authorize(credentials) {
         const { email, password } = credentials as {
           email: string;
           password: string;
@@ -25,15 +25,14 @@ export const authOptions: NextAuthOptions = {
             email,
           },
         });
-        console.log(user);
         if (user) {
           const comparePass = await bcrypt.compare(password, user.password);
           if (!comparePass) {
-            return null;
+            throw new Error("Email or Password is incorrect");
           }
           return user;
         } else {
-          return null;
+          throw new Error("User does not exists");
         }
       },
     }),
@@ -44,7 +43,8 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
   },
-  secret: "somaescreas",
+  debug: true,
+  secret: process.env.NEXTAUTH_SECRET,
 };
 
 export default NextAuth(authOptions);
