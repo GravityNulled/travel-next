@@ -6,14 +6,13 @@ import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 const index = (
   props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) => {
-  return <div>{props.user.email}</div>;
+  return <div>{props.session.user?.email}</div>;
 };
 
 export default index;
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await getServerSession(context.req, context.res, authOptions);
-
   if (!session) {
     return {
       redirect: {
@@ -30,7 +29,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   };
   return {
     props: {
-      user,
+      session,
     },
   };
 }
