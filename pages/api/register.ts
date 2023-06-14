@@ -4,7 +4,7 @@ import prisma from "@/utils/client";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<User | string>
+  res: NextApiResponse
 ) {
   if (req.method != "POST") {
     return;
